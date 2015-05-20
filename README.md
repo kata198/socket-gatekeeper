@@ -15,10 +15,10 @@ There is no information to the client describing what is running where, or that 
 
 You can use Socket Gatekeeper for many tasks:
 
-# Securing protocols that do not have any inherit security
-# Only opening one port on a machine where several administrative services are running. Admins are given their own unique passwords to acccess the services they require
-# Opening a port to the outside world which then routes using secure passwords to any number of internal services
-# Several others!
+* Securing protocols that do not have any inherit security
+* Only opening one port on a machine where several administrative services are running. Admins are given their own unique passwords to acccess the services they require
+* Opening a port to the outside world which then routes using secure passwords to any number of internal services
+* Several others!
 
 
 Mapping File
