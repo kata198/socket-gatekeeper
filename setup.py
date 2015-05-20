@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
 
-f = open('README', 'r')
+f = open('README.md', 'r')
 long_description = f.read()
 f.close()
 
