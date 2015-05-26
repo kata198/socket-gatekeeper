@@ -59,13 +59,27 @@ class Listener(multiprocessing.Process):
         while self.keepGoing is True:
             currentWorkers = self.myWorkers[:]
             for worker in currentWorkers:
-                worker.join(.02)
-                if worker.is_alive() == False:
-                    self.myWorkers.remove(worker)
-            for thread in self.tmpThreads:
-                thread.join(.02)
-                if thread.is_alive() == False:
-                    self.tmpThreads.append(thread)
+                try:
+                    worker.join(.1)
+                    if worker.is_alive() == False:
+                        self.myWorkers.remove(worker)
+                except:
+                    try:
+                        self.myWorkers.remove(worker)
+                    except:
+                        pass
+
+            currentThreads = self.tmpThreads[:]
+            for thread in currentThreads:
+                try:
+                    thread.join(.1)
+                    if thread.is_alive() == False:
+                        self.tmpThreads.remove(thread)
+                except:
+                    try:
+                        self.tmpThreads.remove(thread)
+                    except:
+                        pass
 
             time.sleep(1.5)
         sys.stderr.write('cleanup thread is done')
@@ -97,14 +111,20 @@ class Listener(multiprocessing.Process):
 
         remainingWorkers = []
         for myWorker in self.myWorkers:
-            myWorker.join(.03)
-            if myWorker.is_alive() is True:
+            myWorker.join(.05)
+            if myWorker.is_alive() == True:
                 remainingWorkers.append(myWorker)
 
         if len(remainingWorkers) > 0:
             time.sleep(1)
             for myWorker in remainingWorkers:
                 myWorker.join(.2)
+                if myWorker.is_alive() == True:
+                    try:
+                        os.kill(myWorker.pid, signal.SIGKILL)
+                    except:
+                        pass
+            time.sleep(.1)
 
         sys.stdout.write('Listener done\n')
         sys.exit(0)

@@ -194,7 +194,7 @@ if __name__ == '__main__':
             listener.join()
             sys.stderr.write('Done\n')
             sys.stderr.flush()
-        time.sleep(4)
+        time.sleep(5)
         signal.signal(signal.SIGTERM, signal.SIG_DFL)
         signal.signal(signal.SIGINT, signal.SIG_DFL)
         os.kill(os.getpid(), signal.SIGTERM)
