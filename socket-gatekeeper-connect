@@ -53,7 +53,7 @@ if __name__ == '__main__':
         sys.stderr.write('Failed to connect to %s\n' %(sys.argv[1],))
         sys.exit(1)
 
-    publicKey = sock.recv(1080)
+    publicKey = sock.recv(4200)
     encryptor = RSA.importKey(publicKey)
     
 

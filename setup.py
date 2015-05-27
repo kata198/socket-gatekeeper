@@ -82,7 +82,7 @@ Depends on python 2.7 and ArgumentParser (https://pypi.python.org/pypi/argumentp
 from setuptools import setup
 
 setup(name='socket-gatekeeper',
-        version='1.1',
+        version='1.2',
         packages=['socket_gatekeeper',],
         scripts=['socket-gatekeeperd', 'socket-gatekeeper-connect'],
         requires=['argumentparser', 'pycrypto'],
