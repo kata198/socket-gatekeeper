@@ -1,8 +1,11 @@
 #!/usr/bin/env python2
 
+###
+#    Copyright (c) 2015 Timothy Savannah <kata198@gmail.com> LGPL v2.1
+#    See LICENSE for more information, or https://gnu.org/licenses/old-licenses/lgpl-2.1.txt
+###
 
 
-import getpass
 import select
 import socket
 import sys
@@ -14,8 +17,8 @@ try:
 except ImportError:
     from Queue import Queue, Empty as QueueEmpty
 
-import random
-from Crypto.PublicKey import RSA
+
+from socket_gatekeeper.GatekeeperSocket import GatekeeperSocket
 
 from socket_gatekeeper.utils import closeSocket
 
@@ -46,19 +49,15 @@ if __name__ == '__main__':
         sys.exit(1)
 
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock = GatekeeperSocket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         sock.connect( (addrSplit[0], int(addrSplit[1])) )
     except socket.error:
         sys.stderr.write('Failed to connect to %s\n' %(sys.argv[1],))
         sys.exit(1)
 
-    publicKey = sock.recv(4200)
-    encryptor = RSA.importKey(publicKey)
-    
 
-    password = encryptor.encrypt(getpass.getpass(), random.randint(1, 40))[0]
-    sock.send(password + '\r\n')
+    sock.doAuthenticationFromInput()
 
     dataQueue = Queue()
 

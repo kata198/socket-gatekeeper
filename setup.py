@@ -5,7 +5,8 @@ Socket Gatekeeper
 =================
 
 
-Socket Gatekeeper provides a means of password securing and routing arbitrary sockets.
+Socket Gatekeeper provides a means of password securing and routing arbitrary sockets. It can add security to existing services that provide no/weak authentication,
+  and replace several ports to the outside world with a single point of entry.
 
 It listens on a socket and waits for a connection. Upon connection, it sends a 1024-bit RSA public key to the client.
 The client uses this public key to encrypt the password and sends it back over the wire.
@@ -77,17 +78,31 @@ Dependencies
 
 Depends on python 2.7 and ArgumentParser (https://pypi.python.org/pypi/argumentparser) as well as PyCrypto (https://pypi.python.org/pypi/pycrypto)
 
+
+Integrating Into Applications
+=============================
+
+
+socket-gatekeeperd sits in front of your daemons to add security to any protocol. But you want to connect to that service using existing tools?
+You should use socket_gatekeeper.GatekeeperSocket. It extends the standard python "socket" with methods that either perform the handshake with
+a given password, or prompt the user and perform the handshake that way. After authentication, it behaves just as a normal socket. Thus, you can
+extend any code by replacing socket with GatekeeperSocket.
+
+For use with other languages as the client, see GatekeeperSocket for the simple implementation of the handshake. It should be easy to implement in 
+other languages.
+
+
 """
 
 from setuptools import setup
 
 setup(name='socket-gatekeeper',
-        version='1.2',
+        version='1.3',
         packages=['socket_gatekeeper',],
         scripts=['socket-gatekeeperd', 'socket-gatekeeper-connect'],
         requires=['argumentparser', 'pycrypto'],
         install_requires=['argumentparser', 'pycrypto'],
-        keywords=['socket', 'password', 'gatekeeper', 'security', 'auth', 'access', 'control'],
+        keywords=['socket', 'password', 'gatekeeper', 'security', 'auth', 'access', 'control', 'add', 'authenticate', 'RSA'],
         url='https://github.com/kata198/socket-gatekeeper',
         long_description=long_description,
         author='Tim Savannah',
@@ -95,8 +110,8 @@ setup(name='socket-gatekeeper',
         maintainer='Tim Savannah',
         maintainer_email='kata198@gmail.com',
         license='LGPLv2',
-        description='A security layer for managing access to external/internal applications',
-        classifiers=['Development Status :: 4 - Beta',
+        description='Add authentication and enhance security to any existing service/protocol',
+        classifiers=['Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
         'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)',
         'Programming Language :: Python :: 2',

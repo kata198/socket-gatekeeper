@@ -3,7 +3,8 @@ Socket Gatekeeper
 =================
 
 
-Socket Gatekeeper provides a means of password securing and routing arbitrary sockets.
+Socket Gatekeeper provides a means of password securing and routing arbitrary sockets. It can add security to existing services that provide no/weak authentication,
+  and replace several ports to the outside world with a single point of entry.
 
 It listens on a socket and waits for a connection. Upon connection, it sends a 1024-bit RSA public key to the client.
 The client uses this public key to encrypt the password and sends it back over the wire.
@@ -68,6 +69,17 @@ Once you have a server up and running, you can connect to it with the provided "
 You specify the address and port on which to connect, and it handles the RSA portion, prompts for a password which is not echoed
 to the screen, and then serves as an in-between to you and the endpoint.
 
+Integrating Into Applications
+=============================
+
+
+socket-gatekeeperd sits in front of your daemons to add security to any protocol. But you want to connect to that service using existing tools?
+You should use socket\_gatekeeper.GatekeeperSocket. It extends the standard python "socket" with methods that either perform the handshake with
+a given password, or prompt the user and perform the handshake that way. After authentication, it behaves just as a normal socket. Thus, you can
+extend any code by replacing socket with GatekeeperSocket.
+
+For use with other languages as the client, see GatekeeperSocket for the simple implementation of the handshake. It should be easy to implement in 
+other languages.
 
 
 Dependencies

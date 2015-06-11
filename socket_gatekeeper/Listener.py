@@ -1,6 +1,7 @@
-
-# Based off code by Timothy Savannah (c) 2015, granted GPL exclusion to NCBI. NCBI Has full rights to modify and redistribute this code as seen fit
-#  without being bound by the terms of GPL.
+###
+#    Copyright (c) 2015 Timothy Savannah <kata198@gmail.com> LGPL v2.1
+#    See LICENSE for more information, or https://gnu.org/licenses/old-licenses/lgpl-2.1.txt
+###
 
 import multiprocessing
 import os
