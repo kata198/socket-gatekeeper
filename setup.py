@@ -24,8 +24,8 @@ You can use Socket Gatekeeper for many tasks:
 * Several others!
 
 
-Mapping File
-============
+Mapping File (configuration)
+============================
 
 The routing provided by the daemon is controlled by a mapping file.
 
@@ -44,10 +44,10 @@ You can derive a sha256 sum with the following script:
 You may have multiple passwords lead to the same endpoint, but a single password may only lead to one endpoint.
 
 
-Starting The Server
-===================
+Starting The Server (in front of other services)
+================================================
 
-Use the provided command "socket-gatekeeperd" to start a gatekeeper daemon.
+Use the provided command *socket-gatekeeperd* to start a gatekeeper daemon.
 
 Required Arguments:
 
@@ -64,18 +64,25 @@ Other Arguments:
     --enable-quit                This will intercept the messages "quit" and "exit" and cause them to terminate the connection.
 
 
-Connecting To The Server
-========================
+Connecting To The Server (telnet style)
+=======================================
 
-Once you have a server up and running, you can connect to it with the provided "socket-gatekeeper-connect" program.
+Once you have a server up and running, you can connect to it with the provided *socket-gatekeeper-connect* program.
+
 You specify the address and port on which to connect, and it handles the RSA portion, prompts for a password which is not echoed
 to the screen, and then serves as an in-between to you and the endpoint.
 
 
-Integrating Into Applications
-=============================
+    Usage: ./socket-gatekeeper-connect Addr:port
 
-socket-gatekeeperd sits in front of your daemons to add security to any protocol. 
+        Connects to a gatekeeper socket. This is basically the same as telnetting to the socket, except it will not echo the password
+        back on the screen, so this is more secure.
+
+
+Integrating Into Applications (socket style)
+============================================
+
+*socket-gatekeeperd* sits in front of your daemons to add security to any protocol. 
 
 But you want to connect to that service using existing tools?
 
