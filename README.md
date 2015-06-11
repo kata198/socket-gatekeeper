@@ -23,7 +23,7 @@ You can use Socket Gatekeeper for many tasks:
 
 
 Mapping File (configuration)
-============================
+----------------------------
 
 The routing provided by the daemon is controlled by a mapping file.
 
@@ -42,7 +42,7 @@ You can derive a sha256 sum with the following script:
 You may have multiple passwords lead to the same endpoint, but a single password may only lead to one endpoint.
 
 Starting The Server (in front of other services)
-================================================
+=-----------------------------------------------
 
 Use the provided command *socket-gatekeeperd* to start a gatekeeper daemon.
 
@@ -62,7 +62,7 @@ Other Arguments:
 
 
 Connecting To The Socket (telnet style)
-=======================================
+=--------------------------------------
 
 Once you have a server up and running, you can connect to it with the provided *socket-gatekeeper-connect* program.
 
@@ -78,7 +78,7 @@ to the screen, and then serves as an in-between to you and the endpoint.
 
 
 Integrating Into Applications (socket style)
-============================================
+=-------------------------------------------
 
 
 *socket-gatekeeperd* sits in front of your daemons to add security to any protocol. But you want to connect to that service using existing tools?
@@ -104,6 +104,6 @@ Example:
 
 
 Dependencies
-============
+------------
 
 Depends on python 2.7 and ArgumentParser (https://pypi.python.org/pypi/argumentparser) as well as PyCrypto (https://pypi.python.org/pypi/pycrypto)
