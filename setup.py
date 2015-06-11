@@ -72,6 +72,44 @@ You specify the address and port on which to connect, and it handles the RSA por
 to the screen, and then serves as an in-between to you and the endpoint.
 
 
+Integrating Into Applications
+=============================
+
+socket-gatekeeperd sits in front of your daemons to add security to any protocol. 
+
+But you want to connect to that service using existing tools?
+
+
+You should use socket_gatekeeper.GatekeeperSocket. It extends the standard python "socket" with methods that either perform the handshake with
+
+a given password, or prompt the user and perform the handshake that way. After authentication, it behaves just as a normal socket. Thus, you can
+
+extend any code by replacing socket with GatekeeperSocket.
+
+For use with other languages as the client, see GatekeeperSocket for the simple implementation of the handshake. It should be easy to implement in 
+
+other languages.
+
+
+
+Example:
+--------
+
+    sock = GatekeeperSocket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+
+        sock.connect( (addrSplit[0], int(addrSplit[1])) )
+
+    except socket.error:
+
+        sys.stderr.write('Failed to connect to %s\n' %(sys.argv[1],))
+
+        sys.exit(1)
+
+
+    sock.doAuthenticationFromInput()
+
 
 Dependencies
 ============
@@ -79,25 +117,12 @@ Dependencies
 Depends on python 2.7 and ArgumentParser (https://pypi.python.org/pypi/argumentparser) as well as PyCrypto (https://pypi.python.org/pypi/pycrypto)
 
 
-Integrating Into Applications
-=============================
-
-
-socket-gatekeeperd sits in front of your daemons to add security to any protocol. But you want to connect to that service using existing tools?
-You should use socket_gatekeeper.GatekeeperSocket. It extends the standard python "socket" with methods that either perform the handshake with
-a given password, or prompt the user and perform the handshake that way. After authentication, it behaves just as a normal socket. Thus, you can
-extend any code by replacing socket with GatekeeperSocket.
-
-For use with other languages as the client, see GatekeeperSocket for the simple implementation of the handshake. It should be easy to implement in 
-other languages.
-
-
 """
 
 from setuptools import setup
 
 setup(name='socket-gatekeeper',
-        version='1.3',
+        version='1.3.1',
         packages=['socket_gatekeeper',],
         scripts=['socket-gatekeeperd', 'socket-gatekeeper-connect'],
         requires=['argumentparser', 'pycrypto'],

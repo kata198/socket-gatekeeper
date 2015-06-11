@@ -81,6 +81,19 @@ extend any code by replacing socket with GatekeeperSocket.
 For use with other languages as the client, see GatekeeperSocket for the simple implementation of the handshake. It should be easy to implement in 
 other languages.
 
+Example:
+--------
+
+    sock = GatekeeperSocket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        sock.connect( (addrSplit[0], int(addrSplit[1])) )
+    except socket.error:
+        sys.stderr.write('Failed to connect to %s\n' %(sys.argv[1],))
+        sys.exit(1)
+
+
+    sock.doAuthenticationFromInput()
+
 
 Dependencies
 ============
