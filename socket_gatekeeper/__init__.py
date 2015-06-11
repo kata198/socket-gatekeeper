@@ -3,4 +3,4 @@
 #    See LICENSE for more information, or https://gnu.org/licenses/old-licenses/lgpl-2.1.txt
 ###
 
-VERSION = (1, 3, 1)
+VERSION = (1, 3, 2)
