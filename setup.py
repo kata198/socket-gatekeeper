@@ -110,7 +110,7 @@ Example:
 
     except socket.error:
 
-        sys.stderr.write('Failed to connect to %s\n' %(sys.argv[1],))
+        sys.stderr.write('Failed to connect to %s\\n' %(sys.argv[1],))
 
         sys.exit(1)
 
