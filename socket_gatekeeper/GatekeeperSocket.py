@@ -35,7 +35,7 @@ class GatekeeperSocket(socket.socket):
         
     def doAuthenticationFromInput(self):
         '''
-            doAuthentication - Prompts tty for password and then performs the gatekeeper handshake.
+            doAuthenticationFromInput - Prompts tty for password and then performs the gatekeeper handshake.
         '''
         publicKey = self.recv(4200)
         encryptor = RSA.importKey(publicKey)
